@@ -89,6 +89,8 @@ def request_entity_too_large(error):
 
 
 @app.route("/", methods=["GET"])
+@app.route("/api/index", methods=["GET"])
+@app.route("/api/index.py", methods=["GET"])
 def index():
     return render_template("index.html")
 

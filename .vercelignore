@@ -6,6 +6,7 @@ tests
 screenshots
 *.png
 generate_documentation_screenshots.py
+capture_states.py
 design.md
 TECH_SPEC.md
 PRODUCT_SPEC.md
