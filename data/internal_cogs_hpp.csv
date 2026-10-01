@@ -1,0 +1,51 @@
+sku,product_name,category,brand,supplier,hpp_per_unit_idr,last_updated
+SKU-LIP-VELVET-01,Velvet Matte Lipstick - Dusky Rose,Lip Makeup,GlowUp,PT Kosmetik Nusantara,65000,2026-10-01
+SKU-LIP-VELVET-02,Velvet Matte Lipstick - Berry Red,Lip Makeup,GlowUp,PT Kosmetik Nusantara,65000,2026-10-01
+SKU-LIP-GLAZE-01,Dewy Tint Lip Glaze - Nude Peach,Lip Makeup,GlowUp,PT Kosmetik Nusantara,55000,2026-10-01
+SKU-SERUM-VITC-01,Glow Radiance Vitamin C Serum 30ml,Skincare,SkinFirst,PT Derma Lab Indonesia,95000,2026-10-01
+SKU-SERUM-HYALU-01,Hydra Barrier Serum 50ml,Skincare,SkinFirst,PT Derma Lab Indonesia,85000,2026-10-01
+SKU-SUNSCREEN-01,UV Shield Watery Sunscreen SPF50 50ml,Skincare,SkinFirst,PT Derma Lab Indonesia,70000,2026-10-01
+SKU-CUSHION-01,Flawless Cover Cushion - 01 Light Beige,Complexion,GlowUp,PT Kosmetik Nusantara,105000,2026-10-01
+SKU-CUSHION-02,Flawless Cover Cushion - 02 Natural,Complexion,GlowUp,PT Kosmetik Nusantara,105000,2026-10-01
+SKU-MICELLAR-01,Gentle Cleansing Micellar Water 400ml,Skincare,SkinFirst,PT Derma Lab Indonesia,45000,2026-10-01
+SKU-MOISTURIZER-01,Ceramide Deep Moisture Cream 50g,Skincare,SkinFirst,PT Derma Lab Indonesia,80000,2026-10-01
+SKU-TONER-01,Centella Soothing Toner 150ml,Skincare,SkinFirst,PT Derma Lab Indonesia,62000,2026-10-01
+SKU-CLEANSER-01,Low pH Amino Acid Facial Cleanser 100ml,Skincare,SkinFirst,PT Derma Lab Indonesia,48000,2026-10-01
+SKU-EYELINER-01,Precision Waterproof Liquid Eyeliner - Black,Eye Makeup,GlowUp,PT Kosmetik Nusantara,38000,2026-10-01
+SKU-MASCARA-01,Lash Extender Volume Mascara,Eye Makeup,GlowUp,PT Kosmetik Nusantara,52000,2026-10-01
+SKU-BLUSH-01,Soft Cheek Liquid Blush - Dusty Coral,Cheek Makeup,GlowUp,PT Kosmetik Nusantara,49000,2026-10-01
+SKU-BLUSH-02,Soft Cheek Liquid Blush - Sweet Rose,Cheek Makeup,GlowUp,PT Kosmetik Nusantara,49000,2026-10-01
+SKU-POWDER-01,Translucent Silky Loose Powder 15g,Complexion,GlowUp,PT Kosmetik Nusantara,58000,2026-10-01
+SKU-CONCEALER-01,Spot Cover Concealer - Medium,Complexion,GlowUp,PT Kosmetik Nusantara,42000,2026-10-01
+SKU-SETTINGSPRAY-01,Matte Lock Makeup Setting Spray 100ml,Complexion,GlowUp,PT Kosmetik Nusantara,56000,2026-10-01
+SKU-CLAYMASK-01,Pore Purifying Mugwort Clay Mask 100g,Skincare,SkinFirst,PT Derma Lab Indonesia,60000,2026-10-01
+SKU-EXFOLIATOR-01,AHA BHA PHA Peeling Solution 30ml,Skincare,SkinFirst,PT Derma Lab Indonesia,68000,2026-10-01
+SKU-EYECREAM-01,Caffeine Eye Serum Roll-on 15ml,Skincare,SkinFirst,PT Derma Lab Indonesia,72000,2026-10-01
+SKU-LIPBALM-01,Hydrating Berry Lip Sleeping Mask 20g,Lip Care,GlowUp,PT Kosmetik Nusantara,40000,2026-10-01
+SKU-LIPOIL-01,Plumping Peptide Lip Oil 6ml,Lip Makeup,GlowUp,PT Kosmetik Nusantara,46000,2026-10-01
+SKU-SHEETMASK-01,Collagen Firming Sheet Mask (Pack of 5),Skincare,SkinFirst,PT Derma Lab Indonesia,35000,2026-10-01
+SKU-BODYWASH-01,Brightening Body Wash Niacinamide 400ml,Body Care,SkinFirst,PT Derma Lab Indonesia,48000,2026-10-01
+SKU-BODYLOTION-01,Deep Repair Body Serum 200ml,Body Care,SkinFirst,PT Derma Lab Indonesia,53000,2026-10-01
+SKU-HAIRSERUM-01,Argan Hair Treatment Oil 80ml,Hair Care,SkinFirst,PT Derma Lab Indonesia,65000,2026-10-01
+SKU-PERFUME-01,Eau de Parfum - Vanilla Mirage 50ml,Fragrance,Velour,PT Aroma Sejati,115000,2026-10-01
+SKU-PERFUME-02,Eau de Parfum - Fresh Citrus Cedar 50ml,Fragrance,Velour,PT Aroma Sejati,115000,2026-10-01
+SKU-FASH-DRESS-01,Floral Tiered Midi Dress - Pastel Blue (S/M),Fashion Dress,Maison Lune,PT Garmen Kreatif,140000,2026-10-01
+SKU-FASH-DRESS-02,Satin Slip Evening Dress - Emerald (M/L),Fashion Dress,Maison Lune,PT Garmen Kreatif,160000,2026-10-01
+SKU-FASH-BLOUSE-01,Puff Sleeve Silk Blouse - Ivory (S),Fashion Top,Maison Lune,PT Garmen Kreatif,105000,2026-10-01
+SKU-FASH-BLOUSE-02,Puff Sleeve Silk Blouse - Ivory (M),Fashion Top,Maison Lune,PT Garmen Kreatif,105000,2026-10-01
+SKU-FASH-CARDIGAN-01,Cropped Knit Cardigan - Oatmeal,Fashion Knitwear,Maison Lune,PT Garmen Kreatif,98000,2026-10-01
+SKU-FASH-PANTS-01,Wide Leg Pleated Trousers - Beige (M),Fashion Bottom,Maison Lune,PT Garmen Kreatif,120000,2026-10-01
+SKU-FASH-PANTS-02,Wide Leg Pleated Trousers - Black (L),Fashion Bottom,Maison Lune,PT Garmen Kreatif,120000,2026-10-01
+SKU-FASH-SKIRT-01,A-Line Pleated Midi Skirt - Taupe,Fashion Bottom,Maison Lune,PT Garmen Kreatif,90000,2026-10-01
+SKU-FASH-BLAZER-01,Oversized Tailored Linen Blazer - Sand,Fashion Outerwear,Maison Lune,PT Garmen Kreatif,185000,2026-10-01
+SKU-FASH-TEE-01,Essential Heavyweight Cotton Tee - White (M),Fashion Top,Maison Lune,PT Garmen Kreatif,55000,2026-10-01
+SKU-FASH-TEE-02,Essential Heavyweight Cotton Tee - Charcoal (L),Fashion Top,Maison Lune,PT Garmen Kreatif,55000,2026-10-01
+SKU-FASH-TOTE-01,Canvas Shoulder Tote Bag - Ecru,Fashion Accessories,Maison Lune,PT Garmen Kreatif,65000,2026-10-01
+SKU-FASH-BAG-01,Vegan Leather Crossbody Bag - Espresso,Fashion Accessories,Maison Lune,PT Garmen Kreatif,135000,2026-10-01
+SKU-FASH-SCARF-01,Printed Silk Voile Scarf - Flora Noir,Fashion Accessories,Maison Lune,PT Garmen Kreatif,45000,2026-10-01
+SKU-FASH-BELT-01,Classic Brass Buckle Leather Belt - Tan,Fashion Accessories,Maison Lune,PT Garmen Kreatif,38000,2026-10-01
+SKU-FASH-SANDAL-01,Strappy Low Block Heel Sandal - Cream (38),Footwear,Maison Lune,PT Sepatu Indah,130000,2026-10-01
+SKU-FASH-FLAT-01,Pointed Toe Ballet Flat - Black (38),Footwear,Maison Lune,PT Sepatu Indah,115000,2026-10-01
+SKU-FASH-LOUNGE-01,Ribbed Pajama Loungewear Set - Sage Green,Loungewear,Maison Lune,PT Garmen Kreatif,110000,2026-10-01
+SKU-FASH-DENIM-01,High Waist Straight Denim - Vintage Blue (28),Fashion Bottom,Maison Lune,PT Garmen Kreatif,145000,2026-10-01
+SKU-FASH-SUNGLASS-01,Retro Cat-Eye UV400 Sunglasses - Tortoise,Fashion Accessories,Maison Lune,PT Optik Mandiri,50000,2026-10-01

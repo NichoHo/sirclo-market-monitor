@@ -1,0 +1,51 @@
+item_id,sku_reference_no,product_name,variation_name,normal_price,current_stock,reserved_stock,stock_status
+SP-ITEM-10001,SKU-LIP-VELVET-01,Velvet Matte Lipstick - Dusky Rose,Default,129000,0,0,OUT_OF_STOCK
+SP-ITEM-10002,SKU-LIP-VELVET-02,Velvet Matte Lipstick - Berry Red,Default,129000,0,0,OUT_OF_STOCK
+SP-ITEM-10003,SKU-LIP-GLAZE-01,Dewy Tint Lip Glaze - Nude Peach,Default,115000,1,3,LOW_STOCK
+SP-ITEM-10004,SKU-SERUM-VITC-01,Glow Radiance Vitamin C Serum 30ml,Default,179000,0,0,OUT_OF_STOCK
+SP-ITEM-10005,SKU-SERUM-HYALU-01,Hydra Barrier Serum 50ml,Default,165000,4,4,LOW_STOCK
+SP-ITEM-10006,SKU-SUNSCREEN-01,UV Shield Watery Sunscreen SPF50 50ml,Default,139000,0,0,OUT_OF_STOCK
+SP-ITEM-10007,SKU-CUSHION-01,Flawless Cover Cushion - 01 Light Beige,Default,199000,4,4,LOW_STOCK
+SP-ITEM-10008,SKU-CUSHION-02,Flawless Cover Cushion - 02 Natural,Default,199000,0,0,OUT_OF_STOCK
+SP-ITEM-10009,SKU-MICELLAR-01,Gentle Cleansing Micellar Water 400ml,Default,89000,3,4,LOW_STOCK
+SP-ITEM-10010,SKU-MOISTURIZER-01,Ceramide Deep Moisture Cream 50g,Default,159000,1,5,LOW_STOCK
+SP-ITEM-10011,SKU-TONER-01,Centella Soothing Toner 150ml,Default,125000,24,5,IN_STOCK
+SP-ITEM-10012,SKU-CLEANSER-01,Low pH Amino Acid Facial Cleanser 100ml,Default,95000,78,2,IN_STOCK
+SP-ITEM-10013,SKU-EYELINER-01,Precision Waterproof Liquid Eyeliner - Black,Default,79000,53,0,IN_STOCK
+SP-ITEM-10014,SKU-MASCARA-01,Lash Extender Volume Mascara,Default,109000,47,3,IN_STOCK
+SP-ITEM-10015,SKU-BLUSH-01,Soft Cheek Liquid Blush - Dusty Coral,Default,99000,30,3,IN_STOCK
+SP-ITEM-10016,SKU-BLUSH-02,Soft Cheek Liquid Blush - Sweet Rose,Default,99000,10,5,IN_STOCK
+SP-ITEM-10017,SKU-POWDER-01,Translucent Silky Loose Powder 15g,Default,119000,43,4,IN_STOCK
+SP-ITEM-10018,SKU-CONCEALER-01,Spot Cover Concealer - Medium,Default,89000,32,4,IN_STOCK
+SP-ITEM-10019,SKU-SETTINGSPRAY-01,Matte Lock Makeup Setting Spray 100ml,Default,119000,23,5,IN_STOCK
+SP-ITEM-10020,SKU-CLAYMASK-01,Pore Purifying Mugwort Clay Mask 100g,Default,129000,48,5,IN_STOCK
+SP-ITEM-10021,SKU-EXFOLIATOR-01,AHA BHA PHA Peeling Solution 30ml,Default,139000,74,4,IN_STOCK
+SP-ITEM-10022,SKU-EYECREAM-01,Caffeine Eye Serum Roll-on 15ml,Default,149000,35,1,IN_STOCK
+SP-ITEM-10023,SKU-LIPBALM-01,Hydrating Berry Lip Sleeping Mask 20g,Default,85000,57,1,IN_STOCK
+SP-ITEM-10024,SKU-LIPOIL-01,Plumping Peptide Lip Oil 6ml,Default,95000,79,4,IN_STOCK
+SP-ITEM-10025,SKU-SHEETMASK-01,Collagen Firming Sheet Mask (Pack of 5),Default,75000,10,4,IN_STOCK
+SP-ITEM-10026,SKU-BODYWASH-01,Brightening Body Wash Niacinamide 400ml,Default,99000,51,3,IN_STOCK
+SP-ITEM-10027,SKU-BODYLOTION-01,Deep Repair Body Serum 200ml,Default,109000,12,0,IN_STOCK
+SP-ITEM-10028,SKU-HAIRSERUM-01,Argan Hair Treatment Oil 80ml,Default,135000,56,2,IN_STOCK
+SP-ITEM-10029,SKU-PERFUME-01,Eau de Parfum - Vanilla Mirage 50ml,Default,249000,40,0,IN_STOCK
+SP-ITEM-10030,SKU-PERFUME-02,Eau de Parfum - Fresh Citrus Cedar 50ml,Default,249000,40,4,IN_STOCK
+SP-ITEM-10031,SKU-FASH-DRESS-01,Floral Tiered Midi Dress - Pastel Blue (S/M),Default,289000,0,0,OUT_OF_STOCK
+SP-ITEM-10032,SKU-FASH-DRESS-02,Satin Slip Evening Dress - Emerald (M/L),Default,329000,20,0,IN_STOCK
+SP-ITEM-10033,SKU-FASH-BLOUSE-01,Puff Sleeve Silk Blouse - Ivory (S),Default,219000,72,0,IN_STOCK
+SP-ITEM-10034,SKU-FASH-BLOUSE-02,Puff Sleeve Silk Blouse - Ivory (M),Default,219000,78,1,IN_STOCK
+SP-ITEM-10035,SKU-FASH-CARDIGAN-01,Cropped Knit Cardigan - Oatmeal,Default,199000,26,5,IN_STOCK
+SP-ITEM-10036,SKU-FASH-PANTS-01,Wide Leg Pleated Trousers - Beige (M),Default,249000,70,4,IN_STOCK
+SP-ITEM-10037,SKU-FASH-PANTS-02,Wide Leg Pleated Trousers - Black (L),Default,249000,31,2,IN_STOCK
+SP-ITEM-10038,SKU-FASH-SKIRT-01,A-Line Pleated Midi Skirt - Taupe,Default,189000,77,4,IN_STOCK
+SP-ITEM-10039,SKU-FASH-BLAZER-01,Oversized Tailored Linen Blazer - Sand,Default,379000,64,1,IN_STOCK
+SP-ITEM-10040,SKU-FASH-TEE-01,Essential Heavyweight Cotton Tee - White (M),Default,129000,79,5,IN_STOCK
+SP-ITEM-10041,SKU-FASH-TEE-02,Essential Heavyweight Cotton Tee - Charcoal (L),Default,129000,35,5,IN_STOCK
+SP-ITEM-10042,SKU-FASH-TOTE-01,Canvas Shoulder Tote Bag - Ecru,Default,149000,49,3,IN_STOCK
+SP-ITEM-10043,SKU-FASH-BAG-01,Vegan Leather Crossbody Bag - Espresso,Default,279000,57,3,IN_STOCK
+SP-ITEM-10044,SKU-FASH-SCARF-01,Printed Silk Voile Scarf - Flora Noir,Default,99000,76,3,IN_STOCK
+SP-ITEM-10045,SKU-FASH-BELT-01,Classic Brass Buckle Leather Belt - Tan,Default,89000,25,1,IN_STOCK
+SP-ITEM-10046,SKU-FASH-SANDAL-01,Strappy Low Block Heel Sandal - Cream (38),Default,269000,38,0,IN_STOCK
+SP-ITEM-10047,SKU-FASH-FLAT-01,Pointed Toe Ballet Flat - Black (38),Default,239000,53,0,IN_STOCK
+SP-ITEM-10048,SKU-FASH-LOUNGE-01,Ribbed Pajama Loungewear Set - Sage Green,Default,229000,85,4,IN_STOCK
+SP-ITEM-10049,SKU-FASH-DENIM-01,High Waist Straight Denim - Vintage Blue (28),Default,299000,39,4,IN_STOCK
+SP-ITEM-10050,SKU-FASH-SUNGLASS-01,Retro Cat-Eye UV400 Sunglasses - Tortoise,Default,119000,38,0,IN_STOCK

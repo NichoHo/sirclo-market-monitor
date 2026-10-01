@@ -1,0 +1,51 @@
+sku,product_name,category,normal_price_idr,cogs_idr,warehouse_physical_stock,shopee_allocated_stock,tiktok_allocated_stock,is_hero_sku,status
+SKU-LIP-VELVET-01,Velvet Matte Lipstick - Dusky Rose,Lip Makeup,129000,65000,500,0,26,TRUE,ACTIVE
+SKU-LIP-VELVET-02,Velvet Matte Lipstick - Berry Red,Lip Makeup,129000,65000,450,2,39,TRUE,ACTIVE
+SKU-LIP-GLAZE-01,Dewy Tint Lip Glaze - Nude Peach,Lip Makeup,115000,55000,600,0,31,TRUE,ACTIVE
+SKU-SERUM-VITC-01,Glow Radiance Vitamin C Serum 30ml,Skincare,179000,95000,550,0,59,TRUE,ACTIVE
+SKU-SERUM-HYALU-01,Hydra Barrier Serum 50ml,Skincare,165000,85000,480,0,52,TRUE,ACTIVE
+SKU-SUNSCREEN-01,UV Shield Watery Sunscreen SPF50 50ml,Skincare,139000,70000,700,0,30,TRUE,ACTIVE
+SKU-CUSHION-01,Flawless Cover Cushion - 01 Light Beige,Complexion,199000,105000,400,0,57,TRUE,ACTIVE
+SKU-CUSHION-02,Flawless Cover Cushion - 02 Natural,Complexion,199000,105000,520,0,60,TRUE,ACTIVE
+SKU-MICELLAR-01,Gentle Cleansing Micellar Water 400ml,Skincare,89000,45000,650,0,59,TRUE,ACTIVE
+SKU-MOISTURIZER-01,Ceramide Deep Moisture Cream 50g,Skincare,159000,80000,500,0,53,TRUE,ACTIVE
+SKU-TONER-01,Centella Soothing Toner 150ml,Skincare,125000,62000,250,50,15,FALSE,ACTIVE
+SKU-CLEANSER-01,Low pH Amino Acid Facial Cleanser 100ml,Skincare,95000,48000,300,35,69,FALSE,ACTIVE
+SKU-EYELINER-01,Precision Waterproof Liquid Eyeliner - Black,Eye Makeup,79000,38000,320,58,50,FALSE,ACTIVE
+SKU-MASCARA-01,Lash Extender Volume Mascara,Eye Makeup,109000,52000,280,34,42,FALSE,ACTIVE
+SKU-BLUSH-01,Soft Cheek Liquid Blush - Dusty Coral,Cheek Makeup,99000,49000,210,58,28,FALSE,ACTIVE
+SKU-BLUSH-02,Soft Cheek Liquid Blush - Sweet Rose,Cheek Makeup,99000,49000,190,26,63,FALSE,ACTIVE
+SKU-POWDER-01,Translucent Silky Loose Powder 15g,Complexion,119000,58000,240,27,60,FALSE,ACTIVE
+SKU-CONCEALER-01,Spot Cover Concealer - Medium,Complexion,89000,42000,180,59,48,FALSE,ACTIVE
+SKU-SETTINGSPRAY-01,Matte Lock Makeup Setting Spray 100ml,Complexion,119000,56000,310,20,73,FALSE,ACTIVE
+SKU-CLAYMASK-01,Pore Purifying Mugwort Clay Mask 100g,Skincare,129000,60000,260,30,63,FALSE,ACTIVE
+SKU-EXFOLIATOR-01,AHA BHA PHA Peeling Solution 30ml,Skincare,139000,68000,150,25,52,FALSE,ACTIVE
+SKU-EYECREAM-01,Caffeine Eye Serum Roll-on 15ml,Skincare,149000,72000,170,61,39,FALSE,ACTIVE
+SKU-LIPBALM-01,Hydrating Berry Lip Sleeping Mask 20g,Lip Care,85000,40000,230,23,20,FALSE,ACTIVE
+SKU-LIPOIL-01,Plumping Peptide Lip Oil 6ml,Lip Makeup,95000,46000,220,44,52,FALSE,ACTIVE
+SKU-SHEETMASK-01,Collagen Firming Sheet Mask (Pack of 5),Skincare,75000,35000,350,25,44,FALSE,ACTIVE
+SKU-BODYWASH-01,Brightening Body Wash Niacinamide 400ml,Body Care,99000,48000,270,27,63,FALSE,ACTIVE
+SKU-BODYLOTION-01,Deep Repair Body Serum 200ml,Body Care,109000,53000,290,50,73,FALSE,ACTIVE
+SKU-HAIRSERUM-01,Argan Hair Treatment Oil 80ml,Hair Care,135000,65000,180,61,35,FALSE,ACTIVE
+SKU-PERFUME-01,Eau de Parfum - Vanilla Mirage 50ml,Fragrance,249000,115000,160,62,60,FALSE,ACTIVE
+SKU-PERFUME-02,Eau de Parfum - Fresh Citrus Cedar 50ml,Fragrance,249000,115000,140,41,49,FALSE,ACTIVE
+SKU-FASH-DRESS-01,Floral Tiered Midi Dress - Pastel Blue (S/M),Fashion Dress,289000,140000,420,1,35,TRUE,ACTIVE
+SKU-FASH-DRESS-02,Satin Slip Evening Dress - Emerald (M/L),Fashion Dress,329000,160000,190,46,35,FALSE,ACTIVE
+SKU-FASH-BLOUSE-01,Puff Sleeve Silk Blouse - Ivory (S),Fashion Top,219000,105000,210,74,63,FALSE,ACTIVE
+SKU-FASH-BLOUSE-02,Puff Sleeve Silk Blouse - Ivory (M),Fashion Top,219000,105000,230,49,43,FALSE,ACTIVE
+SKU-FASH-CARDIGAN-01,Cropped Knit Cardigan - Oatmeal,Fashion Knitwear,199000,98000,170,56,22,FALSE,ACTIVE
+SKU-FASH-PANTS-01,Wide Leg Pleated Trousers - Beige (M),Fashion Bottom,249000,120000,250,44,19,FALSE,ACTIVE
+SKU-FASH-PANTS-02,Wide Leg Pleated Trousers - Black (L),Fashion Bottom,249000,120000,220,55,66,FALSE,ACTIVE
+SKU-FASH-SKIRT-01,A-Line Pleated Midi Skirt - Taupe,Fashion Bottom,189000,90000,180,49,23,FALSE,ACTIVE
+SKU-FASH-BLAZER-01,Oversized Tailored Linen Blazer - Sand,Fashion Outerwear,379000,185000,130,42,55,FALSE,ACTIVE
+SKU-FASH-TEE-01,Essential Heavyweight Cotton Tee - White (M),Fashion Top,129000,55000,310,42,78,FALSE,ACTIVE
+SKU-FASH-TEE-02,Essential Heavyweight Cotton Tee - Charcoal (L),Fashion Top,129000,55000,290,65,73,FALSE,ACTIVE
+SKU-FASH-TOTE-01,Canvas Shoulder Tote Bag - Ecru,Fashion Accessories,149000,65000,260,33,48,FALSE,ACTIVE
+SKU-FASH-BAG-01,Vegan Leather Crossbody Bag - Espresso,Fashion Accessories,279000,135000,160,32,46,FALSE,ACTIVE
+SKU-FASH-SCARF-01,Printed Silk Voile Scarf - Flora Noir,Fashion Accessories,99000,45000,220,48,69,FALSE,ACTIVE
+SKU-FASH-BELT-01,Classic Brass Buckle Leather Belt - Tan,Fashion Accessories,89000,38000,240,66,61,FALSE,ACTIVE
+SKU-FASH-SANDAL-01,Strappy Low Block Heel Sandal - Cream (38),Footwear,269000,130000,140,43,32,FALSE,ACTIVE
+SKU-FASH-FLAT-01,Pointed Toe Ballet Flat - Black (38),Footwear,239000,115000,150,80,78,FALSE,ACTIVE
+SKU-FASH-LOUNGE-01,Ribbed Pajama Loungewear Set - Sage Green,Loungewear,229000,110000,180,26,21,FALSE,ACTIVE
+SKU-FASH-DENIM-01,High Waist Straight Denim - Vintage Blue (28),Fashion Bottom,299000,145000,200,29,34,FALSE,ACTIVE
+SKU-FASH-SUNGLASS-01,Retro Cat-Eye UV400 Sunglasses - Tortoise,Fashion Accessories,119000,50000,210,35,69,FALSE,ACTIVE

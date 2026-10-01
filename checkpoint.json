@@ -1,0 +1,806 @@
+[
+  {
+    "title": "Parser: Shopee Orders CSV",
+    "description": "parse_shopee_orders reads shopee_orders.csv, maps columns to internal OrderRow schema, returns 50 rows with channel='shopee'",
+    "test": "test_parse_shopee_orders",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: TikTok Orders CSV",
+    "description": "parse_tiktok_orders reads tiktok_orders.csv, maps columns to internal OrderRow schema, returns 50 rows with channel='tiktok'",
+    "test": "test_parse_tiktok_orders",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: Shopee Inventory CSV",
+    "description": "parse_shopee_inventory reads shopee_inventory.csv, maps columns to internal InventoryRow schema, returns 50 rows with channel='shopee'",
+    "test": "test_parse_shopee_inventory",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: TikTok Inventory CSV",
+    "description": "parse_tiktok_inventory reads tiktok_inventory.csv, maps columns to internal InventoryRow schema, returns 50 rows with channel='tiktok'",
+    "test": "test_parse_tiktok_inventory",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: COGS CSV",
+    "description": "parse_cogs_csv reads internal_cogs_hpp.csv, returns 50 COGSRow dicts with sku, hpp_per_unit, brand, supplier fields",
+    "test": "test_parse_cogs_csv",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: missing required column raises error",
+    "description": "If a CSV is missing a required column (e.g. sku_reference_no), parser raises an exception with a message naming the missing column",
+    "test": "test_parse_missing_required_column",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: invalid numeric row returns warning",
+    "description": "If a row has non-numeric value in a numeric column, parser skips the row and includes a warning string in the warnings list",
+    "test": "test_parse_invalid_row_warning",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: empty CSV returns empty list",
+    "description": "A CSV with only a header row and no data rows returns an empty list, not an error",
+    "test": "test_parse_empty_csv",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: dot-separated numbers handled",
+    "description": "Numeric values like '129.000' (Indonesian format) are parsed correctly as 129000 by stripping dots before int conversion",
+    "test": "test_parse_dot_separated_numbers",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: UTF-8 BOM encoding handled",
+    "description": "CSV files saved with UTF-8 BOM (utf-8-sig) are parsed correctly without the BOM appearing in column names",
+    "test": "test_parse_utf8_bom",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "DB: SQLite init creates cogs table",
+    "description": "Calling init_db creates the cogs table in SQLite if it does not exist. Table has columns: sku, product_name, category, brand, supplier, hpp_per_unit, last_updated",
+    "test": "test_db_init",
+    "file": "tests/test_db.py"
+  },
+  {
+    "title": "DB: bulk insert COGS data",
+    "description": "Inserting 50 COGS rows via bulk insert stores all 50 in the database. SELECT * returns 50 rows.",
+    "test": "test_db_bulk_insert",
+    "file": "tests/test_db.py"
+  },
+  {
+    "title": "DB: bulk insert replaces duplicates",
+    "description": "Inserting a COGS row with an existing SKU replaces the old row (INSERT OR REPLACE). No duplicate SKUs in table.",
+    "test": "test_db_upsert",
+    "file": "tests/test_db.py"
+  },
+  {
+    "title": "DB: update single SKU HPP",
+    "description": "Updating hpp_per_unit for one SKU via update function changes only that row. Other rows unchanged.",
+    "test": "test_db_update_single",
+    "file": "tests/test_db.py"
+  },
+  {
+    "title": "DB: delete single SKU",
+    "description": "Deleting one SKU removes it from the table. Count decreases by 1.",
+    "test": "test_db_delete_single",
+    "file": "tests/test_db.py"
+  },
+  {
+    "title": "DB: get all COGS returns dict keyed by SKU",
+    "description": "get_all_cogs returns a dict mapping sku -> hpp_per_unit for use by the calculation engine",
+    "test": "test_db_get_all_cogs_dict",
+    "file": "tests/test_db.py"
+  },
+  {
+    "title": "Engine: margin positive classified correctly",
+    "description": "An order where actual_unit_price > hpp * 1.2 is classified as level='positive'",
+    "test": "test_margin_positive",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: margin warning classified correctly",
+    "description": "An order where actual_unit_price is between hpp and hpp * 1.2 is classified as level='warning'",
+    "test": "test_margin_warning",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: margin negative classified correctly",
+    "description": "An order where actual_unit_price < hpp is classified as level='negative' with negative margin value",
+    "test": "test_margin_negative",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: margin sorted by loss",
+    "description": "calculate_margins output is sorted with level='negative' first, then by margin ascending (biggest loss at top)",
+    "test": "test_margin_sort_order",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: unmapped SKU skipped with warning",
+    "description": "If an order's SKU is not in the COGS dict, it is excluded from margin_alerts and added to unmapped_skus list",
+    "test": "test_margin_unmapped_sku",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: budget safe level",
+    "description": "Total loss <= 50% of campaign_budget returns meter_level='safe'",
+    "test": "test_budget_safe",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: budget caution level",
+    "description": "Total loss between 51-80% of campaign_budget returns meter_level='caution'",
+    "test": "test_budget_caution",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: budget over level",
+    "description": "Total loss > 80% of campaign_budget returns meter_level='over'",
+    "test": "test_budget_over",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: budget zero division safe",
+    "description": "campaign_budget=0 returns pct_used=0 and meter_level='safe', no ZeroDivisionError",
+    "test": "test_budget_zero_division",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: run rate calculation",
+    "description": "Given 10 units sold over 2 hours, run_rate_per_hour = 5.0",
+    "test": "test_run_rate_basic",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: stockout prediction time",
+    "description": "Given run_rate=5/hr and channel_stock=20, hours_until_stockout=4.0 and stockout_time is 4 hours from now",
+    "test": "test_stockout_prediction",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: zero velocity returns infinity",
+    "description": "SKU with no orders (velocity=0) returns hours_until_stockout=inf and stockout_time=None, not an error",
+    "test": "test_run_rate_zero_velocity",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: zero stock returns zero hours",
+    "description": "SKU with channel_stock=0 returns hours_until_stockout=0 and level='negative'",
+    "test": "test_run_rate_zero_stock",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: run rate sorted by stockout",
+    "description": "Output sorted by hours_until_stockout ascending. Infinity values at the bottom.",
+    "test": "test_run_rate_sort_order",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: rebalance detects starved channel",
+    "description": "SKU with shopee_stock=0, tiktok_stock=30, warehouse_stock=500 returns level='warning' with recommendation to replenish Shopee",
+    "test": "test_rebalance_starved_channel",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: rebalance ignores balanced SKU",
+    "description": "SKU with shopee_stock=50, tiktok_stock=40, warehouse_stock=200 is not included in rebalance output (level='positive', filtered out)",
+    "test": "test_rebalance_balanced_sku",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: rebalance ignores low warehouse",
+    "description": "SKU with shopee_stock=0 but warehouse_stock=30 (<=50) is not flagged for rebalance",
+    "test": "test_rebalance_low_warehouse",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: rebalance warehouse-only SKU",
+    "description": "SKU exists in warehouse but not in any marketplace inventory -> shown with shopee_stock=0, tiktok_stock=0",
+    "test": "test_rebalance_warehouse_only_sku",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "API: POST /api/cogs/upload stores data",
+    "description": "Uploading internal_cogs_hpp.csv to POST /api/cogs/upload returns 200 with inserted=50. GET /api/cogs returns 50 rows.",
+    "test": "test_api_cogs_upload",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: GET /api/cogs returns all COGS",
+    "description": "After uploading COGS, GET /api/cogs returns JSON with data array and count field",
+    "test": "test_api_cogs_get",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: PUT /api/cogs/<sku> updates HPP",
+    "description": "PUT /api/cogs/SKU-SUNSCREEN-01 with {hpp_per_unit: 70000} returns 200. Subsequent GET shows updated value.",
+    "test": "test_api_cogs_update",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: PUT /api/cogs/<sku> returns 404 for unknown SKU",
+    "description": "PUT /api/cogs/SKU-NONEXISTENT returns 404",
+    "test": "test_api_cogs_update_not_found",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: DELETE /api/cogs/<sku> removes SKU",
+    "description": "DELETE /api/cogs/SKU-SUNSCREEN-01 returns 200. Subsequent GET /api/cogs count decreases by 1.",
+    "test": "test_api_cogs_delete",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze returns full analysis",
+    "description": "Uploading 4 sample CSVs + campaign_budget=5000000 to POST /api/analyze returns 200 with margin_alerts, budget_status, run_rate, rebalance, unmapped_skus, warnings, summary_text",
+    "test": "test_api_analyze_full",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze detects negative margins",
+    "description": "Using sample data, margin_alerts contains entries with level='negative'. At least 9 from Shopee + 8 from TikTok.",
+    "test": "test_api_analyze_negative_margins",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze returns budget status",
+    "description": "budget_status contains total_loss, campaign_budget, remaining, pct_used, and meter_level fields",
+    "test": "test_api_analyze_budget_status",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze returns run rate",
+    "description": "run_rate array contains entries with run_rate_per_hour, hours_until_stockout, and stockout_time fields",
+    "test": "test_api_analyze_run_rate",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze returns rebalance",
+    "description": "rebalance array contains entries where marketplace stock <= 5 and warehouse > 50",
+    "test": "test_api_analyze_rebalance",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze missing file returns 400",
+    "description": "Sending only 3 of 4 required CSV files returns 400 with error message",
+    "test": "test_api_analyze_missing_file",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze bad CSV returns 400",
+    "description": "Uploading a CSV with missing required columns returns 400 with error naming the missing column",
+    "test": "test_api_analyze_bad_csv",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze includes summary_text",
+    "description": "Response contains summary_text field with plain text starting with 'RINGKASAN MARKETPLACE MONITOR'",
+    "test": "test_api_analyze_summary_text",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: GET /api/sample-data loads demo",
+    "description": "GET /api/sample-data returns 200 with same response shape as POST /api/analyze, using files from data/ folder",
+    "test": "test_api_sample_data",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "Frontend: page loads with empty state",
+    "description": "GET / returns 200 with HTML containing upload slots, empty state instructions, and 'Muat Data Sample 10.10' button",
+    "test": "test_frontend_empty_state",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "Integration: full pipeline with sample data",
+    "description": "Upload COGS CSV, then upload 4 marketplace CSVs with budget=5000000, verify response contains all 5 sections with correct data from simulation",
+    "test": "test_integration_full_pipeline",
+    "file": "tests/test_integration.py"
+  },
+  {
+    "title": "Integration: COGS persists across requests",
+    "description": "Upload COGS, restart Flask test client, GET /api/cogs still returns data (SQLite persistence)",
+    "test": "test_integration_cogs_persistence",
+    "file": "tests/test_integration.py"
+  },
+  {
+    "title": "Integration: sample data matches simulation",
+    "description": "GET /api/sample-data returns margin_alerts with at least 15 negative-level entries (9 Shopee + 8 TikTok from simulated data)",
+    "test": "test_integration_sample_data_counts",
+    "file": "tests/test_integration.py"
+  },
+  {
+    "title": "Parser: Latin-1 encoding fallback",
+    "description": "When CSV content is encoded in Latin-1 / ISO-8859-1 rather than UTF-8, parser falls back to Latin-1 decoding without raising UnicodeDecodeError",
+    "test": "test_parse_latin1_encoding",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: header case-insensitivity and whitespace",
+    "description": "CSV column matching is case-insensitive and trims leading/trailing whitespace (e.g. ' SKU_reference_no ' matches required 'sku_reference_no')",
+    "test": "test_parse_case_insensitive_whitespace_headers",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: warehouse inventory CSV",
+    "description": "parse_warehouse_inventory reads master_warehouse_inventory_cogs.csv and returns dict mapping sku -> warehouse_physical_stock",
+    "test": "test_parse_warehouse_inventory",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: duplicate order IDs preserved",
+    "description": "Multiple rows sharing the same order_id representing multi-item orders are all parsed without deduplication",
+    "test": "test_parse_duplicate_order_ids_preserved",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "Parser: non-CSV binary file raises error",
+    "description": "Uploading corrupted or binary data that cannot be parsed as CSV raises an error",
+    "test": "test_parse_corrupted_file_error",
+    "file": "tests/test_parser.py"
+  },
+  {
+    "title": "DB: get single SKU details",
+    "description": "get_cogs_by_sku returns the full row dictionary for an existing SKU and None for a non-existent SKU",
+    "test": "test_db_get_cogs_by_sku",
+    "file": "tests/test_db.py"
+  },
+  {
+    "title": "DB: empty database returns empty dict",
+    "description": "get_all_cogs on an empty database returns an empty dictionary without errors",
+    "test": "test_db_empty_database",
+    "file": "tests/test_db.py"
+  },
+  {
+    "title": "DB: update single SKU preserves other fields",
+    "description": "Updating hpp_per_unit leaves product_name, category, brand, and supplier values unchanged",
+    "test": "test_db_update_preserves_other_columns",
+    "file": "tests/test_db.py"
+  },
+  {
+    "title": "Engine: budget calculates loss with order quantity",
+    "description": "An order with qty > 1 and negative margin multiplies abs(margin) by qty to calculate accurate total loss",
+    "test": "test_budget_multi_quantity_loss",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: budget remaining can be negative",
+    "description": "When total_loss exceeds campaign_budget, remaining is negative and pct_used is greater than 100.0",
+    "test": "test_budget_remaining_negative",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: run rate aggregates multiple orders per SKU",
+    "description": "When multiple orders exist for the same SKU and channel, run rate sums all quantities and calculates hours from earliest order",
+    "test": "test_run_rate_multi_order_aggregation",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: stockout level thresholds classification",
+    "description": "SKUs with hours_until_stockout < 2 are classified as 'negative', 2-6 hours as 'warning', and >= 6 hours as 'positive'",
+    "test": "test_stockout_levels_classification",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: inventory SKUs without orders omitted from run rate",
+    "description": "SKUs in inventory that have no sales in orders are excluded from run_rate list (velocity cannot be determined)",
+    "test": "test_run_rate_inventory_without_orders_skipped",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: rebalance recommendation text and cap calculation",
+    "description": "Recommendation string follows 'Replenish {channel} (+{qty} unit)' and caps transfer at min(100, wh_stock // 2)",
+    "test": "test_rebalance_recommendation_text_and_cap",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: rebalance detects both channels starved",
+    "description": "SKU with shopee_stock <= 5 and tiktok_stock <= 5 with warehouse > 50 generates replenishment recommendations for both channels",
+    "test": "test_rebalance_both_channels_starved",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Engine: rebalance sorted by warehouse stock descending",
+    "description": "Rebalance output is sorted by warehouse_stock descending so SKUs with highest idle stock appear first",
+    "test": "test_rebalance_sort_order",
+    "file": "tests/test_engine.py"
+  },
+  {
+    "title": "Summary: generate WhatsApp summary text format",
+    "description": "generate_summary_text produces formatted plain text with header, BUDGET line, ALERT JUAL RUGI, PREDIKSI HABIS, and PERLU REPLENISH sections",
+    "test": "test_generate_summary_text_structure",
+    "file": "tests/test_summary.py"
+  },
+  {
+    "title": "Summary: WhatsApp summary Rupiah number formatting",
+    "description": "Summary text formats Rupiah values with dot separators (e.g. 'Rp 5.000.000') and percentages rounded to 1 decimal",
+    "test": "test_summary_text_rupiah_formatting",
+    "file": "tests/test_summary.py"
+  },
+  {
+    "title": "Summary: WhatsApp summary with zero losses and empty alerts",
+    "description": "When there are no negative margin orders or critical stockouts, summary generates clean zero-count sections without crashing",
+    "test": "test_summary_text_empty_alerts",
+    "file": "tests/test_summary.py"
+  },
+  {
+    "title": "Summary: alert card copy text generation",
+    "description": "generate_alert_copy_text generates exact format 'ALERT: {sku} ({name}) jual rugi -{margin}/unit di {channel}. Harga jual Rp {actual}, HPP Rp {hpp}. Segera cek voucher.'",
+    "test": "test_generate_alert_card_copy_text",
+    "file": "tests/test_summary.py"
+  },
+  {
+    "title": "API: POST /api/cogs/upload missing file returns 400",
+    "description": "POST /api/cogs/upload without 'cogs_file' part returns 400 Bad Request with descriptive JSON error",
+    "test": "test_api_cogs_upload_missing_file",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/cogs/upload invalid CSV format returns 400",
+    "description": "POST /api/cogs/upload with missing required column (e.g. 'hpp_per_unit') returns 400 Bad Request",
+    "test": "test_api_cogs_upload_invalid_csv",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: PUT /api/cogs/<sku> invalid body returns 400",
+    "description": "PUT /api/cogs/<sku> with missing or non-integer hpp_per_unit returns 400 Bad Request",
+    "test": "test_api_cogs_update_invalid_body",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze unmapped SKUs included in response",
+    "description": "Orders with SKUs missing from COGS populate the unmapped_skus list and return 200 without crashing",
+    "test": "test_api_analyze_unmapped_skus",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze non-numeric budget returns 400",
+    "description": "Submitting a string like 'abc' in campaign_budget returns 400 Bad Request",
+    "test": "test_api_analyze_invalid_budget",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze zero campaign budget returns safe",
+    "description": "Submitting campaign_budget=0 returns 200 with pct_used=0 and meter_level='safe'",
+    "test": "test_api_analyze_zero_budget",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze empty CSVs return 200 with empty lists",
+    "description": "Uploading CSVs with only headers returns 200 with empty alert arrays and safe budget",
+    "test": "test_api_analyze_empty_csvs",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "API: POST /api/analyze returns data warnings list",
+    "description": "If an uploaded CSV has a non-numeric row in a numeric column, the warning message appears in response['warnings']",
+    "test": "test_api_analyze_warnings_returned",
+    "file": "tests/test_api.py"
+  },
+  {
+    "title": "Frontend: HTML contains all 4 marketplace upload slots",
+    "description": "GET / returns HTML with file inputs for shopee_orders, tiktok_orders, shopee_inventory, and tiktok_inventory",
+    "test": "test_frontend_upload_slots_present",
+    "file": "tests/test_frontend.py"
+  },
+  {
+    "title": "Frontend: HTML contains 3 tabs for alerts, run rate, and rebalance",
+    "description": "GET / returns HTML with tabs for 'Jual Rugi', 'Prediksi Habis', and 'Rebalancing'",
+    "test": "test_frontend_tabs_present",
+    "file": "tests/test_frontend.py"
+  },
+  {
+    "title": "Frontend: HTML contains budget meter container and progress bar",
+    "description": "GET / returns HTML with budget meter container, numerical labels, and progress bar element",
+    "test": "test_frontend_budget_meter_elements",
+    "file": "tests/test_frontend.py"
+  },
+  {
+    "title": "Frontend: CSS contains all design tokens from design.md",
+    "description": "static/style.css defines exact CSS variables: --gray-50 through --gray-900, --status-negative, --meter-safe, --font-sans, --font-mono",
+    "test": "test_frontend_design_tokens_css",
+    "file": "tests/test_frontend.py"
+  },
+  {
+    "title": "Frontend: no emojis in UI files as per design guidelines",
+    "description": "index.html and style.css contain zero emoji characters, adhering to clean dashboard guidelines",
+    "test": "test_frontend_no_emoji_rule",
+    "file": "tests/test_frontend.py"
+  },
+  {
+    "title": "Frontend: toast notification element present in template",
+    "description": "index.html contains toast container element for displaying copy-to-clipboard confirmations",
+    "test": "test_frontend_toast_element_present",
+    "file": "tests/test_frontend.py"
+  },
+  {
+    "title": "Frontend: copy summary button present",
+    "description": "index.html contains secondary button for 'Salin Ringkasan'",
+    "test": "test_frontend_copy_summary_button_present",
+    "file": "tests/test_frontend.py"
+  },
+  {
+    "title": "Frontend: COGS management section present",
+    "description": "index.html contains upload slot or management trigger for COGS data",
+    "test": "test_frontend_cogs_section_present",
+    "file": "tests/test_frontend.py"
+  },
+  {
+    "title": "Acceptance Criteria 1: analysis executes under 30 seconds",
+    "description": "POST /api/analyze with 50-row datasets completes execution well within the 30-second budget",
+    "test": "test_ac1_analysis_speed",
+    "file": "tests/test_acceptance.py"
+  },
+  {
+    "title": "Acceptance Criteria 2: all negative margin orders detected",
+    "description": "Every order where actual_unit_price < HPP is captured in margin_alerts with level='negative'",
+    "test": "test_ac2_all_negative_margins_detected",
+    "file": "tests/test_acceptance.py"
+  },
+  {
+    "title": "Acceptance Criteria 3: run rate accuracy equals sold divided by elapsed hours",
+    "description": "Run rate matches manual calculation of total units sold divided by hours elapsed",
+    "test": "test_ac3_run_rate_accuracy",
+    "file": "tests/test_acceptance.py"
+  },
+  {
+    "title": "Acceptance Criteria 4: stockout prediction within 15-minute tolerance",
+    "description": "Predicted stockout time equals remaining stock divided by run rate within +- 15 minute tolerance",
+    "test": "test_ac4_stockout_prediction_tolerance",
+    "file": "tests/test_acceptance.py"
+  },
+  {
+    "title": "Acceptance Criteria 5: budget meter sum equals sum of loss across orders selling below HPP",
+    "description": "total_loss equals the sum of (hpp - actual_unit_price) * qty for all orders with negative margin",
+    "test": "test_ac5_budget_meter_sum",
+    "file": "tests/test_acceptance.py"
+  },
+  {
+    "title": "Acceptance Criteria 6: starved marketplace stock with warehouse over 50 triggers rebalancing",
+    "description": "SKUs with marketplace stock <= 5 and warehouse > 50 appear in rebalancing with replenishment recommendations",
+    "test": "test_ac6_rebalancing_starved_skus",
+    "file": "tests/test_acceptance.py"
+  },
+  {
+    "title": "Acceptance Criteria 7: alert card copy text produces single-item action message",
+    "description": "Alert card copy text matches exact single-item WhatsApp action message template",
+    "test": "test_ac7_alert_card_copy_format",
+    "file": "tests/test_acceptance.py"
+  },
+  {
+    "title": "Acceptance Criteria 8: Salin Ringkasan generates complete executive overview",
+    "description": "Summary text contains overview, budget, top losses, stockout predictions, and rebalancing recommendations",
+    "test": "test_ac8_summary_text_complete",
+    "file": "tests/test_acceptance.py"
+  },
+  {
+    "title": "Acceptance Criteria 9: COGS data persists after restart",
+    "description": "HPP data remains available in SQLite after database connection cycle and across page refreshes",
+    "test": "test_ac9_cogs_persistence",
+    "file": "tests/test_acceptance.py"
+  },
+  {
+    "title": "Acceptance Criteria 10: Muat Data Sample loads simulation without uploading",
+    "description": "GET /api/sample-data loads simulation files from data/ folder and returns valid analysis response",
+    "test": "test_ac10_sample_data_demo",
+    "file": "tests/test_acceptance.py"
+  },
+  {
+    "title": "Acceptance Criteria 11: zero velocity SKUs show infinity without crashing",
+    "description": "SKUs with zero sales in simulation window show hours_until_stockout=inf and stockout_time=None",
+    "test": "test_ac11_zero_velocity_infinity",
+    "file": "tests/test_acceptance.py"
+  },
+  {
+    "title": "Guardrails: SlidingWindowRateLimiter Unit Test",
+    "description": "SlidingWindowRateLimiter correctly tracks and evicts request timestamps per (IP, bucket) key",
+    "test": "test_sliding_window_rate_limiter_unit",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Sliding Window Eviction",
+    "description": "SlidingWindowRateLimiter resets request allowance once time advances past the sliding window",
+    "test": "test_sliding_window_eviction",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: InFlightLock Unit Test",
+    "description": "InFlightLock acquires active mutex per (IP, endpoint) and rejects concurrent acquisitions until released",
+    "test": "test_in_flight_lock_unit",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Rate Limit POST /api/analyze 10 requests",
+    "description": "POST /api/analyze allows 10 requests per minute and rejects the 11th with HTTP 429 and Retry-After header",
+    "test": "test_api_rate_limit_analyze_10_requests",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Rate Limit POST /api/cogs/upload 10 requests",
+    "description": "POST /api/cogs/upload allows 10 requests per minute and rejects the 11th with HTTP 429",
+    "test": "test_api_rate_limit_cogs_upload_10_requests",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Rate Limit GET /api/sample-data 20 requests",
+    "description": "GET /api/sample-data allows 20 requests per minute and rejects the 21st with HTTP 429 and Retry-After header",
+    "test": "test_api_rate_limit_sample_data_20_requests",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Concurrent Request In-Flight Lock on Analyze",
+    "description": "Duplicate concurrent request to /api/analyze while one is in progress is rejected with HTTP 429",
+    "test": "test_concurrent_request_lock_blocks_duplicate",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Payload Size Limit Guard HTTP 413",
+    "description": "Payload exceeding 16 MB is rejected with HTTP 413 and structured JSON error message",
+    "test": "test_payload_too_large_413",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Campaign Budget Negative Bounds",
+    "description": "Negative campaign budget parameter returns HTTP 400 Bad Request",
+    "test": "test_campaign_budget_bounds_negative",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Campaign Budget Exceeded Bounds",
+    "description": "Campaign budget exceeding 1 trillion returns HTTP 400 Bad Request",
+    "test": "test_campaign_budget_bounds_exceeded",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Campaign Budget Valid Bounds",
+    "description": "Valid campaign budget values (0 and 1 trillion) are accepted without 400 error",
+    "test": "test_campaign_budget_bounds_valid",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Max Row Limit Enforced",
+    "description": "Tabular file with more than 50,000 rows raises error and returns HTTP 400 Bad Request",
+    "test": "test_max_row_limit_enforced",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Client Resilience Contracts in static/app.js",
+    "description": "Verifies static/app.js implements AbortController, preflight file size check, offline recovery, 429 countdown, and no emojis",
+    "test": "test_client_guardrails_contracts_in_app_js",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Guardrails: Button Loading Styling in static/style.css",
+    "description": "Verifies static/style.css defines styles for .is-loading class",
+    "test": "test_style_css_is_loading_present",
+    "file": "tests/test_guardrails.py"
+  },
+  {
+    "title": "Phase 6: AC 1 Analysis Speed Benchmark",
+    "description": "Upload 4 files and verify execution finishes in under 2.0s (well below 30s threshold)",
+    "test": "test_p6_ac1_analysis_speed_benchmark",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: AC 2 All Negative Margins Captured",
+    "description": "Verify all negative margin orders selling below HPP appear in Jual Rugi alerts",
+    "test": "test_p6_ac2_all_negative_margins_detected",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: AC 3 Run Rate Accuracy",
+    "description": "Verify run rate equals total units sold divided by elapsed campaign hours",
+    "test": "test_p6_ac3_run_rate_accuracy",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: AC 4 Stockout Prediction Tolerance",
+    "description": "Verify stockout prediction is within +- 15 minutes of accurate calculation",
+    "test": "test_p6_ac4_stockout_prediction_tolerance",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: AC 5 Budget Meter Sum Verification",
+    "description": "Verify total loss equals the sum of loss across orders selling below HPP",
+    "test": "test_p6_ac5_budget_meter_sum",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: AC 6 Rebalancing Starved SKUs",
+    "description": "Verify SKUs with marketplace stock <= 5 and warehouse > 50 appear in rebalancing recommendations",
+    "test": "test_p6_ac6_rebalancing_starved_skus",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: AC 7 Alert Card Copy Format",
+    "description": "Verify alert card copy text produces exact single-item WhatsApp message",
+    "test": "test_p6_ac7_alert_card_copy_format",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: AC 8 WhatsApp Summary Complete",
+    "description": "Verify summary text contains all 5 sections: overview, budget, top losses, stockouts, and rebalance",
+    "test": "test_p6_ac8_summary_text_complete",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: AC 9 COGS Persistence Across Requests",
+    "description": "Verify COGS data remains accessible across separate client requests and reload cycles",
+    "test": "test_p6_ac9_cogs_persistence",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: AC 10 Sample Data Instant Demo",
+    "description": "Verify GET /api/sample-data loads simulation without requiring manual uploads",
+    "test": "test_p6_ac10_sample_data_demo",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: AC 11 Zero Velocity Stockout Infinity",
+    "description": "Verify SKU without sales shows hours_until_stockout=inf and stockout_time=None without error",
+    "test": "test_p6_ac11_zero_velocity_infinity",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: Excel (.xlsx) End-to-End Pipeline",
+    "description": "Upload Excel .xlsx spreadsheets to /api/cogs/upload and /api/analyze, verifying full analysis results",
+    "test": "test_p6_excel_end_to_end_pipeline",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: UTF-8 BOM and Latin-1 Encoding Ingestion",
+    "description": "Verify files encoded with UTF-8 BOM and Latin-1 are decoded and parsed cleanly",
+    "test": "test_p6_edge_case_utf8_bom_and_latin1_orders",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: Dot-Separated Indonesian Numeric Formats",
+    "description": "Verify numbers formatted with dots (e.g. 150.000) are parsed cleanly without ValueError",
+    "test": "test_p6_edge_case_indonesian_dot_separated_numbers",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: Empty Tabular Files Handling",
+    "description": "Verify files containing only headers return 200 OK with empty lists and safe meter",
+    "test": "test_p6_edge_case_empty_files_safe_handling",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: Unmapped SKUs Warning Capture",
+    "description": "Verify orders with SKUs missing from COGS populate unmapped_skus without crashing",
+    "test": "test_p6_edge_case_unmapped_skus_warning",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: Budget Zero and Over-Budget Bounds",
+    "description": "Verify budget 0 returns safe/0% and exceeded budget returns over/>100% with negative remaining",
+    "test": "test_p6_edge_case_budget_zero_and_over_budget",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: Project-Wide Zero Emoji Policy",
+    "description": "Verify zero emoji characters across templates/index.html, static/style.css, and static/app.js",
+    "test": "test_p6_ux_no_emoji_rule_across_project",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: Design Tokens and Tabular Typography",
+    "description": "Verify design tokens and OpenType tabular-nums in static/style.css",
+    "test": "test_p6_ux_design_tokens_and_tabular_typography",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: Single Primary CTA Principle",
+    "description": "Verify exactly 1 primary CTA button (btn-primary) exists in templates/index.html",
+    "test": "test_p6_ux_single_primary_cta_principle",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  },
+  {
+    "title": "Phase 6: Responsive Layout and Safe Area Insets",
+    "description": "Verify mobile responsive breakpoints and iOS safe-area-inset declarations in style.css",
+    "test": "test_p6_ux_responsive_layout_and_safe_areas",
+    "file": "tests/test_phase6_acceptance_and_polish.py"
+  }
+]

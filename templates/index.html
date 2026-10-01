@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIRCLO Marketplace Monitor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <!-- Header Bar -->
+  <header class="header-bar">
+    <div class="header-title">SIRCLO Marketplace Monitor</div>
+    <div class="header-meta">
+      <span class="header-meta-desktop">10.10 Midnight Mega Sale | Budget Rp 5.000.000</span>
+      <span class="header-meta-mobile">10.10 Sale | Rp 5.000.000</span>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <!-- Error State Banner (Initially Hidden) -->
+    <section class="error-banner" id="error-banner" style="display: none;" role="alert">
+      <div class="error-banner-content">
+        <span class="dot-indicator dot-negative" aria-hidden="true"></span>
+        <span class="error-banner-text" id="error-banner-text">Kolom 'sku_reference_no' tidak ditemukan di file Shopee Orders</span>
+      </div>
+      <button type="button" class="btn btn-ghost btn-sm" id="btn-dismiss-error" aria-label="Tutup pesan error">Tutup</button>
+    </section>
+
+    <!-- Master Data / COGS Management Section -->
+    <section class="cogs-section card" id="cogs-section">
+      <div class="cogs-header">
+        <div>
+          <span class="overline">Master Data</span>
+          <h2 class="section-title" style="margin: 0; font-size: var(--text-base);">Data COGS / HPP</h2>
+        </div>
+        <div style="display: flex; gap: var(--space-2); align-items: center;">
+          <span class="badge badge-neutral" id="cogs-count-badge">50 SKU Terdaftar</span>
+          <button type="button" class="btn btn-secondary" id="btn-toggle-cogs" aria-expanded="false" aria-controls="cogs-drawer">Kelola HPP</button>
+        </div>
+      </div>
+
+      <!-- Collapsible HPP Drawer -->
+      <div id="cogs-drawer" class="cogs-drawer" style="display: none;">
+        <div class="cogs-upload-box">
+          <div class="upload-row upload-slot" id="slot-cogs">
+            <input type="file" id="cogs_file" name="cogs_file" accept=".csv, .xlsx, .xls, .tsv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/csv">
+            <div class="upload-row-main">
+              <span class="upload-row-label">Master COGS / HPP</span>
+              <span class="upload-slot-hint">Pilih berkas (.csv, .xlsx)</span>
+              <span class="upload-slot-filename font-mono"></span>
+            </div>
+            <div class="upload-row-action">
+              <span class="upload-row-btn">Pilih File</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cogs-table-container">
+          <div class="cogs-table-header">
+            <span class="overline">SKU &amp; HPP Terdaftar</span>
+            <span class="text-caption" style="font-size: var(--text-xs); color: var(--gray-500);">Edit HPP langsung pada field di bawah</span>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>SKU</th>
+                  <th>Nama Produk</th>
+                  <th style="text-align: right;">HPP (Rp)</th>
+                  <th style="text-align: center; width: 120px;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="cogs-table-body">
+                <!-- Dynamically populated rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Budget Meter KPI Card -->
+    <section class="budget-meter-card" id="budget-meter-container">
+      <div class="budget-meter-header">
+        <span class="overline">BUDGET CAMPAIGN</span>
+        <span class="badge badge-neutral" id="budget-status-badge">
+          <span class="dot-indicator dot-neutral" id="budget-status-dot" aria-hidden="true"></span>
+          <span id="budget-status-text">Aman</span>
+        </span>
+      </div>
+      <div class="budget-meter-value" id="budget-display">
+        Rp 0 / Rp 5.000.000
+      </div>
+      <div class="budget-meter-subtext" id="budget-subtext">
+        0% terpakai • Sisa budget Rp 5.000.000
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar-fill" id="budget-progress-bar" style="width: 0%;"></div>
+      </div>
+      <div class="progress-scale-labels">
+        <span>0%</span>
+        <span>80% peringatan</span>
+        <span>100% batas</span>
+      </div>
+    </section>
+
+    <!-- Marketplace Data Source -->
+    <section class="upload-section card" id="upload-section">
+      <div class="upload-card-header">
+        <div>
+          <span class="overline">Sumber Data</span>
+          <h2 class="section-title" style="margin: 0; font-size: var(--text-base);">File Transaksi &amp; Stok</h2>
+        </div>
+        <span class="upload-counter" id="upload-status-text">0 / 4 file dipilih</span>
+      </div>
+
+      <form id="upload-form">
+        <div class="upload-rows-container">
+          <!-- Shopee Orders -->
+          <div class="upload-row upload-slot" id="slot-shopee-orders">
+            <input type="file" id="shopee_orders" name="shopee_orders" accept=".csv, .xlsx, .xls, .tsv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/csv">
+            <div class="upload-row-main">
+              <span class="upload-row-label">Shopee Orders</span>
+              <span class="upload-slot-hint">Pilih berkas (.csv, .xlsx)</span>
+              <span class="upload-slot-filename font-mono"></span>
+            </div>
+            <div class="upload-row-action">
+              <span class="upload-row-btn">Pilih File</span>
+              <button type="button" class="btn-slot-reset" aria-label="Hapus file Shopee Orders" style="display: none;">Hapus</button>
+            </div>
+          </div>
+
+          <!-- TikTok Orders -->
+          <div class="upload-row upload-slot" id="slot-tiktok-orders">
+            <input type="file" id="tiktok_orders" name="tiktok_orders" accept=".csv, .xlsx, .xls, .tsv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/csv">
+            <div class="upload-row-main">
+              <span class="upload-row-label">TikTok Orders</span>
+              <span class="upload-slot-hint">Pilih berkas (.csv, .xlsx)</span>
+              <span class="upload-slot-filename font-mono"></span>
+            </div>
+            <div class="upload-row-action">
+              <span class="upload-row-btn">Pilih File</span>
+              <button type="button" class="btn-slot-reset" aria-label="Hapus file TikTok Orders" style="display: none;">Hapus</button>
+            </div>
+          </div>
+
+          <!-- Shopee Stok -->
+          <div class="upload-row upload-slot" id="slot-shopee-inventory">
+            <input type="file" id="shopee_inventory" name="shopee_inventory" accept=".csv, .xlsx, .xls, .tsv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/csv">
+            <div class="upload-row-main">
+              <span class="upload-row-label">Shopee Stok</span>
+              <span class="upload-slot-hint">Pilih berkas (.csv, .xlsx)</span>
+              <span class="upload-slot-filename font-mono"></span>
+            </div>
+            <div class="upload-row-action">
+              <span class="upload-row-btn">Pilih File</span>
+              <button type="button" class="btn-slot-reset" aria-label="Hapus file Shopee Stok" style="display: none;">Hapus</button>
+            </div>
+          </div>
+
+          <!-- TikTok Stok -->
+          <div class="upload-row upload-slot" id="slot-tiktok-inventory">
+            <input type="file" id="tiktok_inventory" name="tiktok_inventory" accept=".csv, .xlsx, .xls, .tsv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/csv">
+            <div class="upload-row-main">
+              <span class="upload-row-label">TikTok Stok</span>
+              <span class="upload-slot-hint">Pilih berkas (.csv, .xlsx)</span>
+              <span class="upload-slot-filename font-mono"></span>
+            </div>
+            <div class="upload-row-action">
+              <span class="upload-row-btn">Pilih File</span>
+              <button type="button" class="btn-slot-reset" aria-label="Hapus file TikTok Stok" style="display: none;">Hapus</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="campaign-bar" style="margin-top: var(--space-4);">
+          <div class="input-group">
+            <label for="campaign_budget" class="input-prefix">Budget Rp</label>
+            <input type="number" id="campaign_budget" name="campaign_budget" class="input-control" value="5000000" placeholder="5000000">
+          </div>
+          <!-- 1 Primary Action per page in accordance with design.md -->
+          <button type="submit" class="btn btn-primary" id="btn-analyze">Analisis Sekarang</button>
+          <!-- Secondary Action -->
+          <button type="button" class="btn btn-secondary" id="btn-load-sample">Muat Data Sample 10.10</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Tabbed Navigation -->
+    <nav class="tab-nav" aria-label="Dashboard Tabs">
+      <button type="button" class="tab-item active" data-tab="tab-jual-rugi" id="tab-btn-jual-rugi">
+        Jual Rugi <span class="badge badge-neutral" id="count-jual-rugi">0</span>
+      </button>
+      <button type="button" class="tab-item" data-tab="tab-prediksi-habis" id="tab-btn-prediksi-habis">
+        Prediksi Habis <span class="badge badge-neutral" id="count-prediksi-habis">0</span>
+      </button>
+      <button type="button" class="tab-item" data-tab="tab-rebalancing" id="tab-btn-rebalancing">
+        Rebalancing <span class="badge badge-neutral" id="count-rebalancing">0</span>
+      </button>
+    </nav>
+
+    <!-- Tab Contents -->
+    <!-- Tab 1: Jual Rugi -->
+    <section id="tab-jual-rugi" class="tab-content active" aria-labelledby="tab-btn-jual-rugi">
+      <div id="alerts-container">
+        <div class="empty-state-notice" id="empty-jual-rugi">
+          Silakan upload 4 file CSV marketplace atau klik "Muat Data Sample 10.10" untuk memulai analisis.
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Prediksi Habis -->
+    <section id="tab-prediksi-habis" class="tab-content" aria-labelledby="tab-btn-prediksi-habis">
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>SKU</th>
+              <th>Channel</th>
+              <th style="text-align: right;">Terjual</th>
+              <th style="text-align: right;">Run Rate/Jam</th>
+              <th style="text-align: right;">Stok</th>
+              <th style="text-align: right;">Prediksi Habis</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="runrate-table-body">
+            <tr id="empty-prediksi-habis">
+              <td colspan="7" style="text-align: center; color: var(--gray-400); padding: var(--space-6);">Belum ada data analisis</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tab 3: Rebalancing -->
+    <section id="tab-rebalancing" class="tab-content" aria-labelledby="tab-btn-rebalancing">
+      <div id="rebalance-container">
+        <div class="empty-state-notice" id="empty-rebalancing">
+          Belum ada rekomendasi transfer stok.
+        </div>
+      </div>
+    </section>
+
+    <!-- WhatsApp Summary Preview & Action Footer -->
+    <section class="summary-section" id="summary-section">
+      <div class="summary-preview-header">
+        <button type="button" class="btn btn-ghost btn-sm" id="btn-toggle-summary-preview">
+          Lihat Pratinjau Teks WhatsApp
+        </button>
+      </div>
+      <div id="summary-preview-container" class="summary-preview-container" style="display: none;">
+        <pre class="summary-preview-text" id="summary-preview-text"></pre>
+      </div>
+
+      <div class="action-footer">
+        <button type="button" class="btn btn-secondary" id="btn-copy-summary">Salin Ringkasan</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Notification Container -->
+  <aside id="toast" class="toast-container" aria-live="polite"></aside>
+</body>
+</html>

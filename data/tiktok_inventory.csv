@@ -1,0 +1,51 @@
+product_id,seller_sku,product_name,variation,retail_price,available_stock,locked_stock,inventory_status
+TT-PROD-20001,SKU-LIP-VELVET-01,Velvet Matte Lipstick - Dusky Rose,Standard,129000,29,5,IN_STOCK
+TT-PROD-20002,SKU-LIP-VELVET-02,Velvet Matte Lipstick - Berry Red,Standard,129000,65,0,IN_STOCK
+TT-PROD-20003,SKU-LIP-GLAZE-01,Dewy Tint Lip Glaze - Nude Peach,Standard,115000,39,0,IN_STOCK
+TT-PROD-20004,SKU-SERUM-VITC-01,Glow Radiance Vitamin C Serum 30ml,Standard,179000,27,6,IN_STOCK
+TT-PROD-20005,SKU-SERUM-HYALU-01,Hydra Barrier Serum 50ml,Standard,165000,46,0,IN_STOCK
+TT-PROD-20006,SKU-SUNSCREEN-01,UV Shield Watery Sunscreen SPF50 50ml,Standard,139000,0,0,OUT_OF_STOCK
+TT-PROD-20007,SKU-CUSHION-01,Flawless Cover Cushion - 01 Light Beige,Standard,199000,57,1,IN_STOCK
+TT-PROD-20008,SKU-CUSHION-02,Flawless Cover Cushion - 02 Natural,Standard,199000,0,0,OUT_OF_STOCK
+TT-PROD-20009,SKU-MICELLAR-01,Gentle Cleansing Micellar Water 400ml,Standard,89000,42,5,IN_STOCK
+TT-PROD-20010,SKU-MOISTURIZER-01,Ceramide Deep Moisture Cream 50g,Standard,159000,56,1,IN_STOCK
+TT-PROD-20011,SKU-TONER-01,Centella Soothing Toner 150ml,Standard,125000,81,1,IN_STOCK
+TT-PROD-20012,SKU-CLEANSER-01,Low pH Amino Acid Facial Cleanser 100ml,Standard,95000,85,4,IN_STOCK
+TT-PROD-20013,SKU-EYELINER-01,Precision Waterproof Liquid Eyeliner - Black,Standard,79000,72,1,IN_STOCK
+TT-PROD-20014,SKU-MASCARA-01,Lash Extender Volume Mascara,Standard,109000,72,6,IN_STOCK
+TT-PROD-20015,SKU-BLUSH-01,Soft Cheek Liquid Blush - Dusty Coral,Standard,99000,64,1,IN_STOCK
+TT-PROD-20016,SKU-BLUSH-02,Soft Cheek Liquid Blush - Sweet Rose,Standard,99000,24,0,IN_STOCK
+TT-PROD-20017,SKU-POWDER-01,Translucent Silky Loose Powder 15g,Standard,119000,67,2,IN_STOCK
+TT-PROD-20018,SKU-CONCEALER-01,Spot Cover Concealer - Medium,Standard,89000,66,3,IN_STOCK
+TT-PROD-20019,SKU-SETTINGSPRAY-01,Matte Lock Makeup Setting Spray 100ml,Standard,119000,71,6,IN_STOCK
+TT-PROD-20020,SKU-CLAYMASK-01,Pore Purifying Mugwort Clay Mask 100g,Standard,129000,18,5,IN_STOCK
+TT-PROD-20021,SKU-EXFOLIATOR-01,AHA BHA PHA Peeling Solution 30ml,Standard,139000,24,0,IN_STOCK
+TT-PROD-20022,SKU-EYECREAM-01,Caffeine Eye Serum Roll-on 15ml,Standard,149000,63,5,IN_STOCK
+TT-PROD-20023,SKU-LIPBALM-01,Hydrating Berry Lip Sleeping Mask 20g,Standard,85000,55,6,IN_STOCK
+TT-PROD-20024,SKU-LIPOIL-01,Plumping Peptide Lip Oil 6ml,Standard,95000,25,1,IN_STOCK
+TT-PROD-20025,SKU-SHEETMASK-01,Collagen Firming Sheet Mask (Pack of 5),Standard,75000,36,1,IN_STOCK
+TT-PROD-20026,SKU-BODYWASH-01,Brightening Body Wash Niacinamide 400ml,Standard,99000,80,3,IN_STOCK
+TT-PROD-20027,SKU-BODYLOTION-01,Deep Repair Body Serum 200ml,Standard,109000,29,3,IN_STOCK
+TT-PROD-20028,SKU-HAIRSERUM-01,Argan Hair Treatment Oil 80ml,Standard,135000,35,2,IN_STOCK
+TT-PROD-20029,SKU-PERFUME-01,Eau de Parfum - Vanilla Mirage 50ml,Standard,249000,71,1,IN_STOCK
+TT-PROD-20030,SKU-PERFUME-02,Eau de Parfum - Fresh Citrus Cedar 50ml,Standard,249000,21,3,IN_STOCK
+TT-PROD-20031,SKU-FASH-DRESS-01,Floral Tiered Midi Dress - Pastel Blue (S/M),Standard,289000,60,0,IN_STOCK
+TT-PROD-20032,SKU-FASH-DRESS-02,Satin Slip Evening Dress - Emerald (M/L),Standard,329000,18,5,IN_STOCK
+TT-PROD-20033,SKU-FASH-BLOUSE-01,Puff Sleeve Silk Blouse - Ivory (S),Standard,219000,81,6,IN_STOCK
+TT-PROD-20034,SKU-FASH-BLOUSE-02,Puff Sleeve Silk Blouse - Ivory (M),Standard,219000,13,0,IN_STOCK
+TT-PROD-20035,SKU-FASH-CARDIGAN-01,Cropped Knit Cardigan - Oatmeal,Standard,199000,42,1,IN_STOCK
+TT-PROD-20036,SKU-FASH-PANTS-01,Wide Leg Pleated Trousers - Beige (M),Standard,249000,64,3,IN_STOCK
+TT-PROD-20037,SKU-FASH-PANTS-02,Wide Leg Pleated Trousers - Black (L),Standard,249000,73,1,IN_STOCK
+TT-PROD-20038,SKU-FASH-SKIRT-01,A-Line Pleated Midi Skirt - Taupe,Standard,189000,63,0,IN_STOCK
+TT-PROD-20039,SKU-FASH-BLAZER-01,Oversized Tailored Linen Blazer - Sand,Standard,379000,33,3,IN_STOCK
+TT-PROD-20040,SKU-FASH-TEE-01,Essential Heavyweight Cotton Tee - White (M),Standard,129000,12,3,IN_STOCK
+TT-PROD-20041,SKU-FASH-TEE-02,Essential Heavyweight Cotton Tee - Charcoal (L),Standard,129000,45,6,IN_STOCK
+TT-PROD-20042,SKU-FASH-TOTE-01,Canvas Shoulder Tote Bag - Ecru,Standard,149000,70,2,IN_STOCK
+TT-PROD-20043,SKU-FASH-BAG-01,Vegan Leather Crossbody Bag - Espresso,Standard,279000,66,5,IN_STOCK
+TT-PROD-20044,SKU-FASH-SCARF-01,Printed Silk Voile Scarf - Flora Noir,Standard,99000,83,5,IN_STOCK
+TT-PROD-20045,SKU-FASH-BELT-01,Classic Brass Buckle Leather Belt - Tan,Standard,89000,74,1,IN_STOCK
+TT-PROD-20046,SKU-FASH-SANDAL-01,Strappy Low Block Heel Sandal - Cream (38),Standard,269000,36,2,IN_STOCK
+TT-PROD-20047,SKU-FASH-FLAT-01,Pointed Toe Ballet Flat - Black (38),Standard,239000,39,0,IN_STOCK
+TT-PROD-20048,SKU-FASH-LOUNGE-01,Ribbed Pajama Loungewear Set - Sage Green,Standard,229000,86,5,IN_STOCK
+TT-PROD-20049,SKU-FASH-DENIM-01,High Waist Straight Denim - Vintage Blue (28),Standard,299000,81,0,IN_STOCK
+TT-PROD-20050,SKU-FASH-SUNGLASS-01,Retro Cat-Eye UV400 Sunglasses - Tortoise,Standard,119000,52,0,IN_STOCK
