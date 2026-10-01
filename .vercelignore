@@ -1,0 +1,13 @@
+.git
+.pytest_cache
+__pycache__
+*.py[cod]
+tests
+screenshots
+*.png
+generate_documentation_screenshots.py
+design.md
+TECH_SPEC.md
+PRODUCT_SPEC.md
+learnings.md
+checkpoint.json

@@ -1,5 +1,7 @@
 import os
+import shutil
 import sqlite3
+import tempfile
 from datetime import date
 from typing import Any, Dict, List, Optional
 
@@ -7,8 +9,22 @@ DEFAULT_DB_PATH = os.path.join(os.path.dirname(__file__), "instance", "cogs.db")
 
 
 def get_db_path(db_path: Optional[str] = None) -> str:
-    """Return explicit db_path if provided, else default instance path."""
-    return db_path if db_path else DEFAULT_DB_PATH
+    """Return explicit db_path if provided, else default instance path or /tmp on Vercel."""
+    if db_path:
+        return db_path
+    if os.environ.get("DB_PATH"):
+        return os.environ["DB_PATH"]
+    if os.environ.get("VERCEL"):
+        tmp_dir = "/tmp" if os.path.exists("/tmp") else tempfile.gettempdir()
+        tmp_db = os.path.join(tmp_dir, "cogs.db")
+        if not os.path.exists(tmp_db) and os.path.exists(DEFAULT_DB_PATH):
+            try:
+                os.makedirs(os.path.dirname(tmp_db), exist_ok=True)
+                shutil.copyfile(DEFAULT_DB_PATH, tmp_db)
+            except Exception:
+                pass
+        return tmp_db
+    return DEFAULT_DB_PATH
 
 
 def init_db(db_path: Optional[str] = None) -> None:

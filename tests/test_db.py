@@ -8,6 +8,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 try:
     from db import (
+        DEFAULT_DB_PATH,
+        get_db_path,
         init_db,
         bulk_insert_cogs,
         get_all_cogs,
@@ -163,6 +165,37 @@ class TestDB(unittest.TestCase):
         self.assertEqual(updated_item["category"], "Skincare")
         self.assertEqual(updated_item["brand"], "BrandX")
         self.assertEqual(updated_item["supplier"], "SupplierY")
+
+    def test_get_db_path_resolution(self):
+        # Explicit path
+        self.assertEqual(get_db_path("custom/path.db"), "custom/path.db")
+
+        # Default path
+        orig_db_env = os.environ.get("DB_PATH")
+        orig_vercel = os.environ.get("VERCEL")
+        try:
+            os.environ.pop("DB_PATH", None)
+            os.environ.pop("VERCEL", None)
+            self.assertEqual(get_db_path(), DEFAULT_DB_PATH)
+
+            # DB_PATH env var
+            os.environ["DB_PATH"] = "env/path.db"
+            self.assertEqual(get_db_path(), "env/path.db")
+
+            # VERCEL env var
+            os.environ.pop("DB_PATH", None)
+            os.environ["VERCEL"] = "1"
+            expected_tmp = os.path.join("/tmp" if os.path.exists("/tmp") else tempfile.gettempdir(), "cogs.db")
+            self.assertEqual(get_db_path(), expected_tmp)
+        finally:
+            if orig_db_env is not None:
+                os.environ["DB_PATH"] = orig_db_env
+            else:
+                os.environ.pop("DB_PATH", None)
+            if orig_vercel is not None:
+                os.environ["VERCEL"] = orig_vercel
+            else:
+                os.environ.pop("VERCEL", None)
 
 
 if __name__ == "__main__":

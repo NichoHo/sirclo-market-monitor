@@ -5,6 +5,7 @@ from flask import Flask, jsonify, render_template, request
 
 from db import (
     DEFAULT_DB_PATH,
+    get_db_path,
     init_db,
     bulk_insert_cogs,
     get_all_cogs,
@@ -43,7 +44,7 @@ app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16 MB upload limit
 
 # Ensure default database directory and table exist
 try:
-    init_db(DEFAULT_DB_PATH)
+    init_db(get_current_db_path())
 except Exception:
     pass
 
@@ -65,7 +66,7 @@ def cleanup_uploaded_files(response):
 
 def get_current_db_path() -> str:
     """Return configured database path or default instance path."""
-    return app.config.get("DB_PATH", DEFAULT_DB_PATH)
+    return app.config.get("DB_PATH", get_db_path())
 
 
 def load_warehouse_inventory(uploaded_file=None):
